@@ -2,23 +2,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "./szilva.h"
+#include <math.h>
 
 int main()
 {
-    int tomb[TOMB_N] = {1, 3, 4, 5, 2};
-
-    for (int i = 1; i < N; i++) {
-        for (int j = N - 1; j >= i; j--) {
-            if (tomb[j-1] > tomb[j]) {
-                int temp = tomb[j-1];
-                tomb[j-1] = tomb[j];
-                tomb[j] = temp;
-            }
-        }
-    }
-
-    printf("\n");
-    for (int i = 0; i < N; i++) printf("%d\n", tomb[i]);
+    float a;
+    printf("Adj meg egy szamot ");
+    scanf("%f", &a);
+    a = ceil(a);
+    printf("%f", a);
 
     return 0;
 }
@@ -165,6 +157,16 @@ Buborékos rendezés
             }
         }
     }
+
+Puts and gets:
+    char alma[100];
+
+    puts("Adj meg egy mondatot. ");
+    fgets(alma, sizeof(alma), stdin); // Alapból kirakja a \n -t gets(alma) nem véd a túlcsordulás ellen
+
+    //scanf("%[^\n]s", alma);
+
+    printf("Szeretem az %s\n", alma);
 
 char alma[80];
 printf("alma= ");
