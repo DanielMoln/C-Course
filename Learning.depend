@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1696581699 source:d:\elte\imperativ_programozas_gyakorlat\projects\learning\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"./szilva.h"
+
+1696233280 d:\elte\imperativ_programozas_gyakorlat\projects\learning\szilva.h
+
