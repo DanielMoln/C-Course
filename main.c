@@ -1,177 +1,90 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include "./szilva.h"
-#include <math.h>
+#include <ctype.h>
+#include <string.h>
 
 int main()
 {
-    float a;
-    printf("Adj meg egy szamot ");
-    scanf("%f", &a);
-    a = ceil(a);
-    printf("%f", a);
+	/*char a;
+	printf("\nAdj meg egy karaktert: ");
+	scanf("%c", &a);
 
-    return 0;
+	if ( isdigit(a) )
+	{
+		printf("Ez egy szam!");
+	}
+	else
+	{
+		printf("Ez nem szám");
+	}*/
+
+	/*char mondat[100];
+	puts("\nAdj meg egy mondatot:");
+	gets(mondat);
+
+	printf("\n%d", countWords(mondat));
+	checkWords(mondat);
+
+	char a = 'a';
+	puts("Nagybetusse/Kisbetusse alakitasa: ");
+	printf("\n%c %c" , toupper(a), tolower(a));*/
+	
+	stringFuncs();
 }
 
-/*
+int isNum(char c)
+{
+	if ( isdigit(c) )
+	{
+		puts("Ez egy szám!");
+	}
+	else
+	{
+		puts("Ez nem szám!");
+	}
+}
 
-Összegzés:
-    int sum = 0;
-    int dolgozatok[TOMB_N] = {1, 3, 4, 5, 4, 4, 3, 2, 1};
-    for (int i = 0; i < TOMB_N; i++) sum += dolgozatok[i];
-    printf("%d", sum);
+int countWords(char* sentence)
+{
+	int i, db = 0;
+	for (i=0; i < strlen(sentence); i++)
+	{
+		if ( isspace(sentence[i]) )
+		{
+			db++;
+		}
+	}
+	return db + 1;
+}
 
-Eldöntés:
-    int T = 3;
-    int i = 0;
-    int tomb[TOMB_N] = {1, 3, 4, 5, 4, 4, 3, 2, 1};
+void checkWords(char* sentence)
+{
+	// how many up/lower characters there are in the word
+	int i, smallDB, bigDB;
+	
+	for (i = 0; i < strlen(sentence); i++)
+	{
+		if ( islower(sentence[i]) ) smallDB++;
+		if ( isupper(sentence[i]) ) bigDB++;
+	}
 
-    while (i < TOMB_N && tomb[i] != T) i++;
+	printf("Kisbetuk szama: %d Nagybetuk szama: %d", smallDB, bigDB);
+}
 
-    printf("%s", (i < TOMB_N ? "Van" : "Nincs"));
+void stringFuncs()
+{
+	char str1[100];
+	char str2[80];
 
-Lineáris keresés:
-    Nem tudom, hogy van-e benne elem
-    int tomb[TOMB_N] = {1, 3, 4, 5, 4, 4, 3, 2, 1};
-    int i = 0;
-    int T = 3;
+	puts("Add meg a string1-t= ");
+	gets(str1);
 
-    while (i < N && tomb[i] != T) i++;
+	puts("Add meg a string2-t= ");
+	gets(str2);
 
-    if (i < N) {
-        printf("Van, indexe: %d", i);
-    } else {
-        printf("Nincs :/");
-    }
+	strcpy(str1, str2);
 
-Kiválasztás:
-    Biztos vagyok benne, hogy van egy ilyen elem
-    int tomb[TOMB_N] = {1, 3, 4, 5, 4, 4, 3, 2, 1};
-    int i = 0;
-    int T = 3;
+	printf("\nA str1 erteke: %s", str1);
+	printf("\nA str2 erteke: %s", str2);
+}
 
-    while (tomb[i] != T) i++;
-
-    printf("A keresett elem indexe => %d", i);
-
-Megszámlálás:
-    int tomb[TOMB_N] = {1, 3, 4, 5, 4, 4, 3, 2, 1};
-    int db = 0;
-    int T = 3;
-
-    for (int i = 0; i < TOMB_N; i++)
-        if (tomb[i] == T)
-            db++;
-
-    printf("A keresett elem darabszama => %d", db);
-
-Min, maximum, min és max egyszerre:
-    int tomb[TOMB_N] = {1, 3, 4, 5, 4, 4, 3, 2, 1};
-    int max = tomb[0];
-
-    for (int i = 1; i < TOMB_N; i++)
-        if (max < tomb[i])
-            max = tomb[i];
-
-    printf("A legnagyobb elem => %d", max);
-
-Min, maximum index:
-    int tomb[TOMB_N] = {1, 3, 4, 5, 4, 4, 3, 2, 1, 9};
-    int minind = 0;
-
-    for (int i = 1; i < TOMB_N; i++)
-        if (tomb[minind] > tomb[i])
-            minind = i;
-
-    printf("A legkisebb elem indexe => %d", minind);
-
-Kiválogatás:
-    int tomb[TOMB_N] = {1, 3, 4, 5, 4, 4, 3, 2, 1, 9};
-    int tomb2[TOMB_N];
-
-    int T = 4;
-    int j = 0;
-
-    for (int i = 0; i < TOMB_N; i++) {
-        if (tomb[i] == T) {
-            tomb2[j] = tomb[i];
-            j++;
-        }
-    }
-
-    for (int i = 0; i < j; i++) printf("Keresett elemeink %d\n", tomb2[i])
-
-Csere:
-    int tomb[TOMB_N] = {1, 3, 4, 5, 2};
-
-    printf("\n");
-    for (int i = 0; i < N; i++) printf("%d\n", tomb[i]);
-
-    for (int i = 0; i < N -1; i++) {
-        for (int j = i + 1; j < N; j++) {
-            if (tomb[i] < tomb[j]) {
-                int temp = tomb[i];
-                tomb[i] = tomb[j];
-                tomb[j] = temp;
-            }
-        }
-    }
-
-    printf("\n");
-    for (int i = 0; i < N; i++) printf("%d\n", tomb[i]);
-
-Rendezés minimumindex kiválasztással: (Itt csak megnézi melyik kisebb, aztán megnézi, hogy kell e rendezni a végén
-                                          így sokkal hatékonyabb, mint az előző, mert az előző minden esetben cserél)
-    int tomb[TOMB_N] = {1, 3, 4, 5, 2};
-
-    for (int i = 0; i < N -1; i++) {
-        int minindex = i;
-
-        for (int j = i + 1; j < N; j++) {
-            if (tomb[j] < tomb[minindex]) {
-                minindex = j;
-            }
-        }
-
-        if (i != minindex) {
-            int temp = tomb[i];
-            tomb[i] = tomb[minindex];
-            tomb[minindex] = temp;
-        }
-    }
-
-    printf("\n");
-    for (int i = 0; i < N; i++) printf("%d\n", tomb[i]);
-
-Buborékos rendezés
-    int tomb[TOMB_N] = {1, 3, 4, 5, 2};
-
-    for (int i = 1; i < N; i++) {
-        for (int j = N - 1; j >= i; j--) {
-            if (tomb[j-1] > tomb[j]) {
-                int temp = tomb[j-1];
-                tomb[j-1] = tomb[j];
-                tomb[j] = temp;
-            }
-        }
-    }
-
-Puts and gets:
-    char alma[100];
-
-    puts("Adj meg egy mondatot. ");
-    fgets(alma, sizeof(alma), stdin); // Alapból kirakja a \n -t gets(alma) nem véd a túlcsordulás ellen
-
-    //scanf("%[^\n]s", alma);
-
-    printf("Szeretem az %s\n", alma);
-
-char alma[80];
-printf("alma= ");
-scanf("%[^\n]s", alma);
-printf("Az alma valtozo erteke: %s", alma);
-
-
-*/
