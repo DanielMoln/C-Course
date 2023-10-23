@@ -1,90 +1,88 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <string.h>
+#include <time.h>
+
+typedef struct dolgozo {
+    int ID;
+    char nev[51];
+    char szemszin[21];
+    int eletkor;
+    float suly;
+} dolgozo;
+
+typedef enum szinek { KEK, PIROS, ZOLD, FEKETE, FEHER, LILA } szinek;
+
+typedef enum bool {
+    false,
+    true
+} bool;
+
+int osszeg(int a, int b);
+
+bool primE(int a)
+{
+    int oszto = 2;
+
+    while (oszto < a)
+    {
+        if (a%oszto == 0) return false;
+        oszto++;
+    }
+
+    return true;
+}
 
 int main()
 {
-	/*char a;
-	printf("\nAdj meg egy karaktert: ");
-	scanf("%c", &a);
+    int tomb[10];
 
-	if ( isdigit(a) )
-	{
-		printf("Ez egy szam!");
-	}
-	else
-	{
-		printf("Ez nem szám");
-	}*/
+    for (int i = 0; i < 10; i++) {
+        scanf("%d", &tomb[i]);
+    }
 
-	/*char mondat[100];
-	puts("\nAdj meg egy mondatot:");
-	gets(mondat);
+    printf("\nElem:\t Ertek:\t Cim:\n");
 
-	printf("\n%d", countWords(mondat));
-	checkWords(mondat);
-
-	char a = 'a';
-	puts("Nagybetusse/Kisbetusse alakitasa: ");
-	printf("\n%c %c" , toupper(a), tolower(a));*/
-	
-	stringFuncs();
+    for (int i = 0; i < 10; i++) {
+        printf("tomb[%d]\t %d\t %p\n", i, *(tomb+i), tomb + i);
+    }
 }
 
-int isNum(char c)
+int osszeg(int a, int b)
 {
-	if ( isdigit(c) )
-	{
-		puts("Ez egy szám!");
-	}
-	else
-	{
-		puts("Ez nem szám!");
-	}
+
 }
 
-int countWords(char* sentence)
-{
-	int i, db = 0;
-	for (i=0; i < strlen(sentence); i++)
-	{
-		if ( isspace(sentence[i]) )
-		{
-			db++;
-		}
-	}
-	return db + 1;
-}
+/*
 
-void checkWords(char* sentence)
-{
-	// how many up/lower characters there are in the word
-	int i, smallDB, bigDB;
-	
-	for (i = 0; i < strlen(sentence); i++)
-	{
-		if ( islower(sentence[i]) ) smallDB++;
-		if ( isupper(sentence[i]) ) bigDB++;
-	}
+bool ertek = primE(9);
 
-	printf("Kisbetuk szama: %d Nagybetuk szama: %d", smallDB, bigDB);
-}
+    printf("Prim-e ? %s", (ertek == 1 ? "Igen" : "Nem"));
 
-void stringFuncs()
-{
-	char str1[100];
-	char str2[80];
+    int x = 3;
+    int *pX = &x;
 
-	puts("Add meg a string1-t= ");
-	gets(str1);
+    printf("\nAz x valtozo erteke: %d", x);
+    printf("\nAz x valtozo erteke: %d", *pX);
 
-	puts("Add meg a string2-t= ");
-	gets(str2);
+    return 0;
 
-	strcpy(str1, str2);
+*/
 
-	printf("\nA str1 erteke: %s", str1);
-	printf("\nA str2 erteke: %s", str2);
-}
+/*
 
+dolgozo Dolgozo1;
+
+    puts("Kerlek toltsd fel az alkalmazottad:");
+    puts("ID Nev Szemszin Eletkor Suly");
+    scanf("%d %s %s %d %f", &Dolgozo1.ID, &Dolgozo1.nev, &Dolgozo1.szemszin, &Dolgozo1.eletkor, &Dolgozo1.suly);
+
+    puts("Alkalmazott feltoltese....");
+    puts("...");
+    puts("..");
+    puts(".");
+
+    printf("%d %s %s %d %f", Dolgozo1.ID, Dolgozo1.nev, Dolgozo1.szemszin, Dolgozo1.eletkor, Dolgozo1.suly);
+
+
+*/
